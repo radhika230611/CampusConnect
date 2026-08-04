@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		10AD0E34301C806E000165B8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 10AD0E33301C806E000165B8 /* FirebaseAnalytics */; };
+		10AD0E36301C806E000165B8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 10AD0E35301C806E000165B8 /* FirebaseAuth */; };
+		10AD0E38301C806E000165B8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 10AD0E37301C806E000165B8 /* FirebaseFirestore */; };
+		10AD0E3A301C806E000165B8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 10AD0E39301C806E000165B8 /* FirebaseMessaging */; };
+		10AD0E3C301C806E000165B8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 10AD0E3B301C806E000165B8 /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		10215CBB3011EB46001BD469 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10AD0E3A301C806E000165B8 /* FirebaseMessaging in Frameworks */,
+				10AD0E34301C806E000165B8 /* FirebaseAnalytics in Frameworks */,
+				10AD0E36301C806E000165B8 /* FirebaseAuth in Frameworks */,
+				10AD0E3C301C806E000165B8 /* FirebaseStorage in Frameworks */,
+				10AD0E38301C806E000165B8 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +125,11 @@
 			);
 			name = CampusConnect;
 			packageProductDependencies = (
+				10AD0E33301C806E000165B8 /* FirebaseAnalytics */,
+				10AD0E35301C806E000165B8 /* FirebaseAuth */,
+				10AD0E37301C806E000165B8 /* FirebaseFirestore */,
+				10AD0E39301C806E000165B8 /* FirebaseMessaging */,
+				10AD0E3B301C806E000165B8 /* FirebaseStorage */,
 			);
 			productName = CampusConnect;
 			productReference = 10215CAD3011EB44001BD469 /* CampusConnect.app */;
@@ -195,6 +213,9 @@
 			);
 			mainGroup = 10215CA43011EB44001BD469;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				10AD0E32301C806E000165B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 10215CAE3011EB44001BD469 /* Products */;
 			projectDirPath = "";
@@ -570,6 +591,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		10AD0E32301C806E000165B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 12.17.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		10AD0E33301C806E000165B8 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10AD0E32301C806E000165B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		10AD0E35301C806E000165B8 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10AD0E32301C806E000165B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		10AD0E37301C806E000165B8 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10AD0E32301C806E000165B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		10AD0E39301C806E000165B8 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10AD0E32301C806E000165B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		10AD0E3B301C806E000165B8 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10AD0E32301C806E000165B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 10215CA53011EB44001BD469 /* Project object */;
 }
