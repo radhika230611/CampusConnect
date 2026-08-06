@@ -8,18 +8,10 @@ struct EventsPage: View {
     var body: some View {
         NavigationStack{
             ZStack{
-                LinearGradient(
-                    colors: [
-                        Color.blue.opacity(0.85),
-                        Color.cyan.opacity(0.25),
-                        Color(UIColor.systemGroupedBackground)
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .ignoresSafeArea()
+                Color(.systemBackground)
+                    .ignoresSafeArea()
                 
-                VStack(spacing: 12){
+                VStack(spacing: 0){
                     //heading
                     HStack(spacing: 15) {
                         Image(systemName: "line.3.horizontal")
@@ -35,7 +27,7 @@ struct EventsPage: View {
                             .resizable()
                             .frame(width: 20, height: 20)
                     }
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.primary)
                     .padding(.bottom, 20)
                     
                     //events categories
@@ -45,13 +37,16 @@ struct EventsPage: View {
                             selectedCategory = .all
                         }label: {
                             Text("All")
-                                .font(.system(size:14, weight: selectedCategory == .all ? .bold : .semibold))
-                                .foregroundStyle(selectedCategory == .all ? .blue : .primary)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundStyle(selectedCategory == .all ? .white : .gray)
                                 .padding(.vertical, 8)
-                                .padding(.horizontal, 16)
-                                .background(selectedCategory == .all ? Color.white : Color.white.opacity(0.6))
-                                .cornerRadius(20)
-                                .shadow(color: selectedCategory == .all ? .black.opacity(0.08) : .clear, radius: 6, x: 0, y: 3)
+                                .padding(.horizontal, 18)
+                                .background(
+                                    selectedCategory == .all
+                                    ? Color.blue
+                                    : Color(.systemGray6)
+                                )
+                                .clipShape(Capsule())
                         }
                         
                         //technical button
@@ -59,13 +54,16 @@ struct EventsPage: View {
                             selectedCategory = .technical
                         }label: {
                             Text("Technical")
-                                .font(.system(size:14, weight: selectedCategory == .technical ? .bold : .semibold))
-                                .foregroundStyle(selectedCategory == .technical ? .blue : .primary)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundStyle(selectedCategory == .technical ? .white : .gray)
                                 .padding(.vertical, 8)
-                                .padding(.horizontal, 16)
-                                .background(selectedCategory == .technical ? Color.white : Color.white.opacity(0.6))
-                                .cornerRadius(20)
-                                .shadow(color: selectedCategory == .technical ? .black.opacity(0.08) : .clear, radius: 6, x: 0, y: 3)
+                                .padding(.horizontal, 18)
+                                .background(
+                                    selectedCategory == .technical
+                                    ? Color.blue
+                                    : Color(.systemGray6)
+                                )
+                                .clipShape(Capsule())
                         }
                         
                         //Cultural
@@ -73,13 +71,16 @@ struct EventsPage: View {
                             selectedCategory = .cultural
                         }label: {
                             Text("Cultural")
-                                .font(.system(size:14, weight: selectedCategory == .cultural ? .bold : .semibold))
-                                .foregroundStyle(selectedCategory == .cultural ? .blue : .primary)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundStyle(selectedCategory == .cultural ? .white : .gray)
                                 .padding(.vertical, 8)
-                                .padding(.horizontal, 16)
-                                .background(selectedCategory == .cultural ? Color.white : Color.white.opacity(0.6))
-                                .cornerRadius(20)
-                                .shadow(color: selectedCategory == .cultural ? .black.opacity(0.08) : .clear, radius: 6, x: 0, y: 3)
+                                .padding(.horizontal, 18)
+                                .background(
+                                    selectedCategory == .cultural
+                                    ? Color.blue
+                                    : Color(.systemGray6)
+                                )
+                                .clipShape(Capsule())
                         }
                         
                         //Sports button
@@ -87,16 +88,19 @@ struct EventsPage: View {
                             selectedCategory = .sports
                         }label: {
                             Text("Sports")
-                                .font(.system(size:14, weight: selectedCategory == .sports ? .bold : .semibold))
-                                .foregroundStyle(selectedCategory == .sports ? .blue : .primary)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundStyle(selectedCategory == .sports ? .white : .gray)
                                 .padding(.vertical, 8)
-                                .padding(.horizontal, 16)
-                                .background(selectedCategory == .sports ? Color.white : Color.white.opacity(0.6))
-                                .cornerRadius(20)
-                                .shadow(color: selectedCategory == .sports ? .black.opacity(0.08) : .clear, radius: 6, x: 0, y: 3)
+                                .padding(.horizontal, 18)
+                                .background(
+                                    selectedCategory == .sports
+                                    ? Color.blue
+                                    : Color(.systemGray6)
+                                )
+                                .clipShape(Capsule())
                         }
                     }
-                    .padding(.vertical, 4)
+                    .padding(.bottom, 15)
                     
                     List{
                         ForEach(events) { event in
@@ -105,13 +109,12 @@ struct EventsPage: View {
                                     Image(event.img)
                                         .resizable()
                                         .scaledToFill()
-                                        .frame(width: 76, height: 76)
-                                        .clipped()
-                                        .cornerRadius(12)
+                                        .frame(width: 72, height: 72)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
                                     
                                     VStack(alignment: .leading, spacing: 6){
                                         Text(event.title)
-                                            .font(.system(size: 15, weight: .bold))
+                                            .font(.system(size: 15, weight: .semibold))
                                             .foregroundStyle(.primary)
                                             .lineLimit(2)
                                         
@@ -121,8 +124,8 @@ struct EventsPage: View {
                                                 .frame(width: 3, height: 3)
                                             Text(event.time)
                                         }
-                                        .font(.system(size: 12, weight: .medium))
-                                        .foregroundStyle(.secondary)
+                                        .font(.system(size:10))
+                                        .foregroundStyle(.gray)
                                         
                                         HStack(spacing: 4){
                                             Image(systemName: "location.fill")
@@ -134,15 +137,15 @@ struct EventsPage: View {
                                         .foregroundStyle(.secondary)
                                     }
                                     
-                                    Spacer(minLength: 4)
+                                    Spacer()
                                     
                                     VStack{
                                         Spacer()
                                         Text(event.category.rawValue)
-                                            .font(.system(size: 10, weight: .bold))
+                                            .font(.system(size: 10, weight: .semibold))
                                             .foregroundStyle(.blue)
-                                            .padding(.vertical, 5)
-                                            .padding(.horizontal, 10)
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 4)
                                             .background(Color.blue.opacity(0.12))
                                             .clipShape(Capsule())
                                     }
@@ -150,11 +153,15 @@ struct EventsPage: View {
                                 .onTapGesture {
                                     selectedEvent = event
                                 }
-                                .padding(12)
+                                .padding(10)
                                 .background(Color.white)
-                                .cornerRadius(16)
-                                .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 4)
-                                .listRowInsets(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Color.gray.opacity(0.08))
+                                )
+                                .shadow(color: .blue.opacity(0.04), radius: 5, y: 2)
+                                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
                             }
@@ -167,9 +174,10 @@ struct EventsPage: View {
                     .scrollContentBackground(.hidden)
                     Spacer()
                     
-                } .padding(.horizontal, 20)
+                }.padding(.horizontal, 16)
+                    .padding(.top, 10)
             }
-        }
+        }.navigationBarHidden(true)
     }
 }
 

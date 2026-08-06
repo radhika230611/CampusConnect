@@ -17,17 +17,8 @@ struct TransportPage: View {
         NavigationStack{
             
             ZStack {
-                // Background Gradient
-                LinearGradient(
-                    colors: [
-                        Color.blue.opacity(0.9),
-                        Color.cyan.opacity(0.25),
-                        Color.white
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .ignoresSafeArea()
+                Color(.systemBackground)
+                    .ignoresSafeArea()
                 
                 
                 VStack(spacing: 0) {
@@ -46,8 +37,8 @@ struct TransportPage: View {
                             .resizable()
                             .frame(width: 20, height: 20)
                     }
-                    .foregroundStyle(.white)
-                    .padding(.bottom, 20)
+                    .foregroundStyle(.primary)
+                    .padding(.bottom, 16)
                     
                     ScrollView{
                         // Location Selection Card
@@ -57,7 +48,7 @@ struct TransportPage: View {
                             HStack {
                                 Image(systemName: "circle")
                                     .frame(width: 22, height: 22)
-                                    .foregroundStyle(.green)
+                                    .foregroundStyle(Color.blue)
                                 
                                 Text("From")
                                     .font(.system(size: 16, weight: .medium))
@@ -85,7 +76,7 @@ struct TransportPage: View {
                                             .font(.system(size: 16, weight: .medium))
                                             .foregroundStyle(fromLocation.isEmpty ? .gray : .primary)
                                         
-                                        Image(systemName: "chevron.right")
+                                        Image(systemName: "chevron.down")
                                             .font(.system(size: 12, weight: .bold))
                                             .foregroundStyle(.gray)
                                     }
@@ -93,12 +84,13 @@ struct TransportPage: View {
                             }
                             
                             Divider()
+                                .overlay(Color.gray.opacity(0.2))
                             
                             // To Location Dropdown (Picker)
                             HStack {
                                 Image(systemName: "circle")
                                     .frame(width: 22, height: 22)
-                                    .foregroundStyle(.red)
+                                    .foregroundStyle(Color.orange)
                                 
                                 Text("To")
                                     .font(.system(size: 16, weight: .medium))
@@ -126,7 +118,7 @@ struct TransportPage: View {
                                             .font(.system(size: 16, weight: .medium))
                                             .foregroundStyle(toLocation.isEmpty ? .gray : .primary)
                                         
-                                        Image(systemName: "chevron.right")
+                                        Image(systemName: "chevron.down")
                                             .font(.system(size: 12, weight: .bold))
                                             .foregroundStyle(.gray)
                                     }
@@ -136,13 +128,17 @@ struct TransportPage: View {
                         .padding(.horizontal, 16)
                         .padding(.vertical, 15)
                         .background(Color.white)
-                        .cornerRadius(12)
-                        .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color.gray.opacity(0.08))
+                        )
+                        .shadow(color: .black.opacity(0.04), radius: 5, y: 2)
                         
                         
                         HStack {
                             Text("Today's Schedule")
-                                .font(.system(size: 16, weight: .bold))
+                                .font(.system(size:17, weight:.semibold))
                                 .foregroundStyle(.primary)
                             
                             Spacer()
@@ -154,10 +150,9 @@ struct TransportPage: View {
                                         toLocation = ""
                                     }
                                 }label: {
-                                    Text("Clear Filters")
-                                        .font(.system(size: 12, weight: .semibold))
-                                        .foregroundStyle(.blue)
-                                }
+                                    Text("Clear")
+                                        .font(.system(size:13, weight:.semibold))
+                                        .foregroundStyle(.blue)                                }
                                 
                             }
                         }
@@ -176,12 +171,13 @@ struct TransportPage: View {
                         }
                         Spacer()
                     }.scrollIndicators(.hidden)
+                        .contentMargins(.top,6)
                     }
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 20)
                     .padding(.top, 10)
                 
             }
-        }
+        }.navigationBarHidden(true)
     }
 
     // route availabe
@@ -191,7 +187,7 @@ struct TransportPage: View {
             // Time Badge
             VStack(alignment: .leading, spacing: 4) {
                 Text(route.time)
-                    .font(.system(size: 16, weight: .bold))
+                    .font(.system(size: 17, weight: .semibold))
                     .foregroundStyle(.primary)
                 
                 HStack(spacing: 6) {
@@ -200,7 +196,7 @@ struct TransportPage: View {
                         .font(.caption2)
                     Text(route.toLocation)
                 }
-                .font(.system(size: 13, weight: .medium))
+                .font(.system(size: 13))
                 .foregroundStyle(.secondary)
             }
             
@@ -210,15 +206,23 @@ struct TransportPage: View {
             Text(route.status)
                 .font(.system(size: 12, weight: .bold))
                 .foregroundStyle(statusColor(for: route.status))
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 5)
                 .background(statusColor(for: route.status).opacity(0.12))
                 .clipShape(Capsule())
+                .overlay(
+                    Capsule()
+                        .stroke(statusColor(for: route.status).opacity(0.2))
+                )
         }
         .padding(16)
         .background(Color.white)
-        .cornerRadius(14)
-        .shadow(color: .black.opacity(0.04), radius: 6, x: 0, y: 2)
+        .clipShape(RoundedRectangle(cornerRadius:16))
+        .overlay(
+            RoundedRectangle(cornerRadius:16)
+                .stroke(Color.gray.opacity(0.08))
+        )
+        .shadow(color:.black.opacity(0.04), radius:5, y:2)
     }
 
     //empty route
@@ -227,10 +231,10 @@ struct TransportPage: View {
             ZStack {
                 Circle()
                     .fill(Color.blue.opacity(0.08))
-                    .frame(width: 80, height: 80)
+                    .frame(width: 70, height: 70)
                 
-                Image(systemName: "bus.double.fill")
-                    .font(.system(size: 36))
+                Image(systemName: "bus.fill")
+                    .font(.system(size: 32))
                     .foregroundStyle(.blue)
             }
             .padding(.top, 20)
@@ -257,15 +261,19 @@ struct TransportPage: View {
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
                     .background(Color.blue)
-                    .cornerRadius(10)
+                    .clipShape(Capsule())
             }
             .padding(.top, 6)
         }
         .padding(.vertical, 30)
         .frame(maxWidth: .infinity)
         .background(Color.white)
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.04), radius: 6, x: 0, y: 2)
+        .clipShape(RoundedRectangle(cornerRadius:16))
+        .overlay(
+            RoundedRectangle(cornerRadius:16)
+                .stroke(Color.gray.opacity(0.08))
+        )
+        .shadow(color:.black.opacity(0.04), radius:5, y:2)
     }
     
     //color picker fro status

@@ -10,19 +10,19 @@ enum NoticeCategory: String, CaseIterable, Hashable {
     var color: Color {
         switch self {
         case .academics:
-            return .green
+            return Color(red: 0.95, green: 0.67, blue: 0.12)
             
         case .exams:
-            return .yellow
+            return Color(red: 0.88, green: 0.25, blue: 0.28)
             
         case .hostel:
-            return .orange
+            return Color(red: 0.00, green: 0.68, blue: 0.84)
             
         case .admin:
-            return .blue
+            return Color(red: 0.16, green: 0.27, blue: 0.55)
             
         case .all:
-            return .gray
+            return .blue
         }}
 }
 
