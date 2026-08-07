@@ -8,8 +8,16 @@ struct EventsPage: View {
     var body: some View {
         NavigationStack{
             ZStack{
-                Color(.systemBackground)
-                    .ignoresSafeArea()
+                LinearGradient(
+                    colors: [
+                        Color(red: 0.96, green: 0.98, blue: 1.00),
+                        Color(red: 0.92, green: 0.96, blue: 1.00),
+                        Color.white
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
                 
                 VStack(spacing: 0){
                     //heading
@@ -44,7 +52,7 @@ struct EventsPage: View {
                                 .background(
                                     selectedCategory == .all
                                     ? Color.blue
-                                    : Color(.systemGray6)
+                                    : Color(.white)
                                 )
                                 .clipShape(Capsule())
                         }
@@ -61,7 +69,7 @@ struct EventsPage: View {
                                 .background(
                                     selectedCategory == .technical
                                     ? Color.blue
-                                    : Color(.systemGray6)
+                                    : Color(.white)
                                 )
                                 .clipShape(Capsule())
                         }
@@ -78,7 +86,7 @@ struct EventsPage: View {
                                 .background(
                                     selectedCategory == .cultural
                                     ? Color.blue
-                                    : Color(.systemGray6)
+                                    : Color(.white)
                                 )
                                 .clipShape(Capsule())
                         }
@@ -95,7 +103,7 @@ struct EventsPage: View {
                                 .background(
                                     selectedCategory == .sports
                                     ? Color.blue
-                                    : Color(.systemGray6)
+                                    : Color(.white)
                                 )
                                 .clipShape(Capsule())
                         }

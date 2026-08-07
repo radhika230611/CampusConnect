@@ -4,28 +4,49 @@ struct HomePage: View {
 
     var body: some View {
         NavigationStack {
-
-                    VStack(spacing: 20){
-                        VStack(alignment: .leading, spacing: 20) {
+            ZStack{
+                LinearGradient(
+                    colors: [
+                        Color(red: 0.96, green: 0.98, blue: 1.00),
+                        Color(red: 0.92, green: 0.96, blue: 1.00),
+                        Color.white
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+                    
+                VStack(spacing: 15){
+                    
+                        //Header
+                        HStack(spacing :20){
+                            Image(systemName: "line.3.horizontal")
+                                .resizable()
+                                .frame(width: 23, height: 17)
+                                .foregroundStyle(.primary)
+                            Spacer()
+                            Image(systemName: "bell")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundStyle(.primary)
                             
-                            //Header
-                            HStack(spacing :20){
-                                Image(systemName: "line.3.horizontal")
+                            NavigationLink{
+                                ProfilePage()
+                            }label: {
+                                Image(systemName: "person.fill")
                                     .resizable()
-                                    .frame(width: 23, height: 17)
-                                    .foregroundStyle(.primary)
-                                Spacer()
-                                Image(systemName: "bell")
-                                    .resizable()
+                                    .scaledToFit()
                                     .frame(width: 20, height: 20)
-                                    .foregroundStyle(.primary)
-                                Image("Dance")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 34, height: 34)
+                                    .foregroundStyle(Color.blue)
+                                    .padding(10)
+                                    .background(Color.blue.opacity(0.12))
                                     .clipShape(Circle())
                             }
                             
+                        }
+                        
+                    ScrollView{
+                        VStack(alignment: .leading, spacing: 20) {
                             //Title
                             
                             
@@ -102,26 +123,27 @@ struct HomePage: View {
                             }.padding()
                                 .background(Color.blue.opacity(0.1))
                                 .clipShape(RoundedRectangle(cornerRadius: 18))
-                        }
-                        
-                        //Latest Notice
-                        HStack {
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("Latest Notice")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                Text("Exam timetable announced\nfor B.Tech CS")
-                                    .font(.headline)
-                            }
-                            Spacer()
-                            Image(systemName: "megaphone.fill")
-                                .font(.title)
-                                .foregroundStyle(.orange)
                             
-                        }
-                        .padding()
-                        .background(Color.orange.opacity(0.15))
-                        .clipShape(RoundedRectangle(cornerRadius: 18))
+                            
+                            //Latest Notice
+                            HStack {
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text("Latest Notice")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                    Text("Exam timetable announced\nfor B.Tech CS")
+                                        .font(.headline)
+                                }
+                                Spacer()
+                                Image(systemName: "megaphone.fill")
+                                    .font(.title)
+                                    .foregroundStyle(.orange)
+                                
+                            }
+                            .padding()
+                            .background(Color.orange.opacity(0.15))
+                            .clipShape(RoundedRectangle(cornerRadius: 18))
+                        
                         
                         //Quick Actions
                         HStack {
@@ -136,9 +158,13 @@ struct HomePage: View {
                         ConnectSection
                         
                         Spacer()
-                        
-                    }.padding(.horizontal,20)
+                    }
+                    }.scrollIndicators(.hidden)
+                    
+                }.padding(.horizontal,16)
                         .padding(.top,10)
+                
+            }
             
             }
             .navigationBarHidden(true)

@@ -17,8 +17,16 @@ struct TransportPage: View {
         NavigationStack{
             
             ZStack {
-                Color(.systemBackground)
-                    .ignoresSafeArea()
+                LinearGradient(
+                    colors: [
+                        Color(red: 0.96, green: 0.98, blue: 1.00),
+                        Color(red: 0.92, green: 0.96, blue: 1.00),
+                        Color.white
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
                 
                 
                 VStack(spacing: 0) {

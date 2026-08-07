@@ -5,6 +5,7 @@ struct FaqDetail: View {
     let selectedFaq: FAQ
 
     var body: some View {
+        
 
         ScrollView(showsIndicators: false) {
 
@@ -36,7 +37,7 @@ struct FaqDetail: View {
             .padding(.horizontal, 12)
             .padding(.top, 10)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color(.systemBackground))
         .navigationTitle("FAQ Detail")
         .navigationBarTitleDisplayMode(.inline)
     }
