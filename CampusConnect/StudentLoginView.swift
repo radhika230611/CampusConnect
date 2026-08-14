@@ -25,21 +25,6 @@ struct StudentLoginView: View {
                         
                         VStack(spacing: 22) {
                             
-                            // Back Button
-                            HStack {
-                                NavigationLink {
-                                    RolePage()
-                                } label: {
-                                    Image(systemName: "chevron.left")
-                                        .font(.system(size: 16, weight: .semibold))
-                                        .foregroundStyle(.primary)
-                                        .frame(width: 36, height: 36)
-                                        .background(Color.white, in: Circle())
-                                        .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
-                                }
-                                
-                                Spacer()
-                            }
                             
                             
                             // Header
@@ -51,7 +36,7 @@ struct StudentLoginView: View {
                                     .frame(width: 75, height: 75)
                                     .background(Color.blue.opacity(0.12), in: Circle())
                                 
-                                Text("Welcome Back 👋")
+                                Text("Welcome 👋")
                                     .font(.system(size: 26, weight: .bold))
                                 
                                 Text("Login to continue your campus journey")

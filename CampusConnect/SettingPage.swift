@@ -66,7 +66,7 @@ struct SettingsPage: View {
                                 
                             }
                             NavigationLink{
-                                RolePage()
+                                StudentLoginView()
                             }label: {
                                 Text("Logout")
                                     .font(.system(size: 14, weight: .semibold))

@@ -7,9 +7,7 @@ struct ContactDetails: View {
         
             ZStack {
                 Color(red: 0.97, green: 0.98, blue: 1.00).ignoresSafeArea()
-
                 VStack(spacing: 20) {
-                    
                     // Profile
                     VStack(spacing: 8) {
                         Image(systemName: "person.fill")
@@ -38,7 +36,6 @@ struct ContactDetails: View {
                     )
                     .shadow(color: .blue.opacity(0.06), radius: 10, y: 4)
 
-                    
                     // Information
                     VStack(spacing: 0) {
                         //phone
@@ -53,13 +50,11 @@ struct ContactDetails: View {
                                 Text("Phone")
                                     .font(.system(size: 11, weight: .medium))
                                     .foregroundStyle(.secondary)
-
                                 Text(contact.phone)
                                     .font(.system(size: 15, weight: .medium))
                                     .foregroundStyle(.primary)
                                     .lineLimit(2)
                             }
-
                             Spacer()
                         }
                         .padding(.vertical, 14)

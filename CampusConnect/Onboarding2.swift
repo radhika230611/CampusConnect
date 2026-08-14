@@ -23,7 +23,7 @@ struct Onboarding2: View {
                         Spacer()
                         
                         NavigationLink {
-                            RolePage()
+                            StudentLoginView()
                         } label: {
                             Text("Skip")
                                 .font(.system(size: 14, weight: .semibold))
