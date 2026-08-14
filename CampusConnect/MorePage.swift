@@ -4,7 +4,7 @@ struct MorePage: View {
     @State private var selectedContact : Contact_info?
     @State private var selectedFaq : FAQ?
     var body: some View {
-        NavigationStack {
+       
             ZStack {
                 LinearGradient(
                     colors: [
@@ -176,7 +176,7 @@ struct MorePage: View {
                     .padding(.horizontal, 16)
                     .padding(.top, 10)
                 
-            }
+            
         }.navigationBarHidden(true)
     }
 }

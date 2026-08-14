@@ -6,12 +6,19 @@ enum EventCategory: String, CaseIterable, Hashable {
     case sports = "Sports"
     case all = "All"
 }
+enum EventSortOption: CaseIterable, Hashable {
+    case az
+    case za
+    case latest
+    case oldest
+
+}
 
 struct Event: Identifiable, Hashable {
     let id = UUID()
     let img: String
     let title: String
-    let date: String
+    let date: Date
     let time: String
     let location: String
     let category: EventCategory
@@ -36,7 +43,7 @@ let events: [Event] = [
     Event(
         img: "Hackathon",
         title: "HACKATHON 2026",
-        date: "Sat, 27 July",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 7,day: 28))!,
         time: "10:00 AM",
         location: "Auditorium",
         category: .technical,
@@ -68,7 +75,7 @@ let events: [Event] = [
     Event(
         img: "Fest",
         title: "Sarang Fest",
-        date: "Sun, 28 July",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 8,day: 20))!,
         time: "5:00 PM",
         location: "Open Air Theatre",
         category: .cultural,
@@ -101,7 +108,7 @@ let events: [Event] = [
     Event(
         img: "Workshop",
         title: "AI Workshop",
-        date: "Mon, 29 July",
+        date: Calendar.current.date(from: DateComponents(year: 2027,month: 3,day: 1))!,
         time: "11:30 AM",
         location: "Lab Block 2",
         category: .technical,
@@ -134,7 +141,7 @@ let events: [Event] = [
     Event(
         img: "Dance",
         title: "Dance Battle",
-        date: "Tue, 30 July",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 7,day: 2))!,
         time: "4:00 PM",
         location: "Main Stage",
         category: .cultural,
@@ -167,7 +174,7 @@ let events: [Event] = [
     Event(
         img: "Cricket",
         title: "Inter College Cricket",
-        date: "Wed, 31 July",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 6,day: 14))!,
         time: "8:00 AM",
         location: "Sports Ground",
         category: .sports,
@@ -200,7 +207,7 @@ let events: [Event] = [
     Event(
         img: "Football",
         title: "Football League",
-        date: "Thu, 1 August",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 7,day: 24))!,
         time: "3:30 PM",
         location: "Football Field",
         category: .sports,
@@ -232,7 +239,7 @@ let events: [Event] = [
     Event(
         img: "Robotics",
         title: "Robotics Expo",
-        date: "Fri, 2 August",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 8,day: 4))!,
         time: "10:00 AM",
         location: "Innovation Lab",
         category: .technical,
@@ -276,7 +283,7 @@ let events: [Event] = [
     Event(
         img: "Basketball",
         title: "Inter College Basketball",
-        date: "Sat, 3 August",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 8,day: 2))!,
         time: "9:00 AM",
         location: "Basketball Court",
         category: .sports,
@@ -321,7 +328,7 @@ let events: [Event] = [
     Event(
         img: "Photography",
         title: "Campus Photography Contest",
-        date: "Sun, 4 August",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 7,day: 21))!,
         time: "2:00 PM",
         location: "Seminar Hall",
         category: .cultural,

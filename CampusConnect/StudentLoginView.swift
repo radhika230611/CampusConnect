@@ -2,163 +2,160 @@ import SwiftUI
 import FirebaseAuth
 
 struct StudentLoginView: View {
-    
+
     @State private var email = ""
     @State private var password = ""
     @State private var isPasswordVisible = false
-    
+
     @State private var message = ""
     @State private var isLoggedIn = false
     
     var body: some View {
+        
         if isLoggedIn {
             MainPage()
-        }
-        else{
-            NavigationStack {
+        } else {
+           
                 ZStack {
-                    Color.white
+                    
+                    Color(red: 0.97, green: 0.98, blue: 1.00)
                         .ignoresSafeArea()
                     
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 0) {
-                            //back button
-                            HStack{
-                                NavigationLink{
+                    ScrollView(showsIndicators: false) {
+                        
+                        VStack(spacing: 22) {
+                            
+                            // Back Button
+                            HStack {
+                                NavigationLink {
                                     RolePage()
-                                }label: {
+                                } label: {
                                     Image(systemName: "chevron.left")
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundStyle(.black)
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundStyle(.primary)
+                                        .frame(width: 36, height: 36)
+                                        .background(Color.white, in: Circle())
+                                        .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
                                 }
+                                
                                 Spacer()
-                            }.padding(.bottom, 28)
+                            }
                             
                             
-                            //Header
-                            VStack(alignment: .leading, spacing: 6) {
+                            // Header
+                            VStack(spacing: 10) {
+                                
+                                Image(systemName: "graduationcap.fill")
+                                    .font(.system(size: 35, weight: .semibold))
+                                    .foregroundStyle(.blue)
+                                    .frame(width: 75, height: 75)
+                                    .background(Color.blue.opacity(0.12), in: Circle())
+                                
                                 Text("Welcome Back 👋")
-                                    .font(.system(size: 25, weight: .bold))
-                                    .foregroundStyle(.black)
+                                    .font(.system(size: 26, weight: .bold))
                                 
-                                Text("Login to continue")
+                                Text("Login to continue your campus journey")
                                     .font(.system(size: 14))
-                                    .foregroundStyle(.gray)
+                                    .foregroundStyle(.secondary)
                             }
-                            .padding(.bottom, 32)
+                            .padding(.top, 10)
                             
                             
-                            //College Email
-                            VStack(alignment: .leading, spacing: 8) {
+                            // Login Card
+                            VStack(alignment: .leading, spacing: 18) {
+                                
                                 Text("College Email")
-                                    .font(.system(size: 13, weight: .medium))
-                                    .foregroundStyle(.black)
+                                    .font(.system(size: 13, weight: .semibold))
                                 
-                                TextField(
-                                    "Email...",
-                                    text: $email
-                                )
+                                TextField("Enter college email", text: $email)
+                                    .font(.system(size: 14))
+                                    .padding(.horizontal, 15)
+                                    .frame(height: 50)
+                                    .background(Color.white)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color.gray.opacity(0.15), lineWidth: 1)
+                                    )
                                 
-                                .padding(.horizontal, 16)
-                                .frame(height: 50)
-                                .background(Color.white)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.gray.opacity(0.25), lineWidth: 1)
-                                )
-                            }
-                            .padding(.bottom, 20)
-                            
-                            
-                            //Password
-                            VStack(alignment: .leading, spacing: 8) {
+                                
                                 Text("Password")
-                                    .font(.system(size: 13, weight: .medium))
-                                    .foregroundStyle(.black)
+                                    .font(.system(size: 13, weight: .semibold))
                                 
                                 HStack {
                                     if isPasswordVisible {
-                                        TextField(
-                                            "Password",
-                                            text: $password
-                                        )
+                                        TextField("Enter password", text: $password)
                                     } else {
-                                        SecureField(
-                                            "Password",
-                                            text: $password
-                                        )
+                                        SecureField("Enter password", text: $password)
                                     }
                                     
                                     Button {
                                         isPasswordVisible.toggle()
                                     } label: {
-                                        Image(
-                                            systemName: isPasswordVisible
-                                            ? "eye.slash"
-                                            : "eye"
-                                        )
-                                        .foregroundStyle(.gray)
+                                        Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                                            .foregroundStyle(.secondary)
                                     }
                                 }
-                                .padding(.horizontal, 16)
+                                .font(.system(size: 14))
+                                .padding(.horizontal, 15)
                                 .frame(height: 50)
                                 .background(Color.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(
-                                            Color.gray.opacity(0.25),
-                                            lineWidth: 1
-                                        )
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.gray.opacity(0.15), lineWidth: 1)
                                 )
-                            }
-                            
-                            
-                            //  Forgot Password
-                            HStack {
-                                Spacer()
+                                
+                                
+                                HStack {
+                                    Spacer()
+                                    
+                                    Button {
+                                        
+                                    } label: {
+                                        Text("Forgot Password?")
+                                            .font(.system(size: 12, weight: .medium))
+                                            .foregroundStyle(.blue)
+                                    }
+                                }
+                                
                                 
                                 Button {
-                                    
+                                    authservice.logIn(email: email, Password: password) { resultMessage, success in
+                                        message = resultMessage
+                                        isLoggedIn = success
+                                    }
                                 } label: {
-                                    Text("Forgot Password?")
-                                        .font(.system(size: 12, weight: .medium))
-                                        .foregroundStyle(Color.blue)
+                                    Text("Login")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundStyle(.white)
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 52)
+                                        .background(.blue)
+                                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                                        .shadow(color: .blue.opacity(0.18), radius: 6, y: 3)
                                 }
-                            }
-                            .padding(.top, 12)
-                            .padding(.bottom, 24)
-                            
-                            
-                            //Login Button
-                            Button (action : {
-                                authservice.logIn(email: email, Password: password){ resultMessage, success in
-                                    message = resultMessage
-                                    isLoggedIn = success
+                                if !message.isEmpty{
+                                    Text(message)
+                                        .font(.footnote)
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundStyle(isLoggedIn ? .green : .red)
+                                        .multilineTextAlignment(.center)
                                 }
-                            })
-                            {
-                                Text("Login")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundStyle(.white)
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: 50)
-                                    .background(
-                                        LinearGradient(
-                                            colors: [
-                                                Color.blue,
-                                                Color.blue.opacity(0.85)
-                                            ],
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        )
-                                    )
-                                    .clipShape(
-                                        RoundedRectangle(cornerRadius: 10)
-                                    )
+                                    
+
                             }
+                            .padding(22)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 22))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 22)
+                                    .stroke(Color.blue.opacity(0.08), lineWidth: 1)
+                            )
+                            .shadow(color: .black.opacity(0.04), radius: 8, y: 4)
                             
                             
-                            //OR Divider
+                            // Divider
                             HStack(spacing: 12) {
                                 Rectangle()
                                     .fill(Color.gray.opacity(0.2))
@@ -166,13 +163,13 @@ struct StudentLoginView: View {
                                 
                                 Text("or")
                                     .font(.system(size: 12))
-                                    .foregroundStyle(.gray)
+                                    .foregroundStyle(.secondary)
                                 
                                 Rectangle()
                                     .fill(Color.gray.opacity(0.2))
                                     .frame(height: 1)
                             }
-                            .padding(.vertical, 20)
+                            .padding(.horizontal, 20)
                             
                             
                             // Google Login
@@ -181,55 +178,52 @@ struct StudentLoginView: View {
                             } label: {
                                 HStack(spacing: 10) {
                                     
-                                    Image("google")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    
+                                    Image(systemName: "globe")
+                                        .foregroundStyle(.blue)
                                     
                                     Text("Continue with Google")
                                         .font(.system(size: 14, weight: .medium))
-                                        .foregroundStyle(.black)
+                                        .foregroundStyle(.primary)
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 50)
                                 .background(Color.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 14))
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(
-                                            Color.gray.opacity(0.35),
-                                            lineWidth: 1
-                                        )
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .stroke(Color.gray.opacity(0.15), lineWidth: 1)
                                 )
                             }
                             
                             
                             // Sign Up
-                            HStack(spacing: 4) {
+                            HStack(spacing: 5) {
                                 Text("Don't have an account?")
                                     .font(.system(size: 13))
-                                    .foregroundStyle(.gray)
+                                    .foregroundStyle(.secondary)
                                 
                                 NavigationLink {
                                     StudentSignUpView(message: $message, isLoggedIn: $isLoggedIn)
                                 } label: {
                                     Text("Sign Up")
                                         .font(.system(size: 13, weight: .semibold))
-                                        .foregroundStyle(Color.blue)
+                                        .foregroundStyle(.blue)
                                 }
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding(.top, 24)
+                            .padding(.bottom, 20)
+                            
                         }
-                        .padding(.horizontal, 24)
-                        .padding(.top, 10)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 15)
                     }
-                }
                 
-            }.navigationBarBackButtonHidden()
+            }
+            .navigationBarBackButtonHidden()
         }
     }
 }
-    
+
+
 #Preview {
     StudentLoginView()
 }

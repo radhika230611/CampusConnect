@@ -14,7 +14,7 @@ struct TransportPage: View {
     }
     
     var body: some View {
-        NavigationStack{
+        
             
             ZStack {
                 LinearGradient(
@@ -181,11 +181,11 @@ struct TransportPage: View {
                     }.scrollIndicators(.hidden)
                         .contentMargins(.top,6)
                     }
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 16)
                     .padding(.top, 10)
                 
             }
-        }.navigationBarHidden(true)
+        .navigationBarHidden(true)
     }
 
     // route availabe

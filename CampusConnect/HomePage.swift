@@ -3,7 +3,7 @@ import SwiftUI
 struct HomePage: View {
 
     var body: some View {
-        NavigationStack {
+      
             ZStack{
                 LinearGradient(
                     colors: [
@@ -25,10 +25,6 @@ struct HomePage: View {
                                 .frame(width: 23, height: 17)
                                 .foregroundStyle(.primary)
                             Spacer()
-                            Image(systemName: "bell")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundStyle(.primary)
                             
                             NavigationLink{
                                 ProfilePage()
@@ -41,6 +37,15 @@ struct HomePage: View {
                                     .padding(10)
                                     .background(Color.blue.opacity(0.12))
                                     .clipShape(Circle())
+                            }
+                            
+                            NavigationLink{
+                                SettingsPage()
+                            }label: {
+                                Image(systemName: "gearshape")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundStyle(.black)
                             }
                             
                         }
@@ -147,15 +152,13 @@ struct HomePage: View {
                         
                         //Quick Actions
                         HStack {
-                            Text("Quick Actions")
+                            Text("More Actions")
                                 .font(.headline)
                             Spacer()
-                            Button("View All") {
-                            }
-                            .font(.subheadline.weight(.semibold))
+                        
                         }
                         
-                        ConnectSection
+                      QuickActionPage()
                         
                         Spacer()
                     }
@@ -164,62 +167,12 @@ struct HomePage: View {
                 }.padding(.horizontal,16)
                         .padding(.top,10)
                 
-            }
+            
             
             }
             .navigationBarHidden(true)
-
         }
     
-
-
-
-     var ConnectSection: some View  {
-
-        VStack(spacing: 0) {
-
-            ForEach(Array(connectItems.enumerated()), id: \.element.id) { index, item in
-
-                HStack(spacing: 14){
-
-                    Image(systemName: item.icon)
-                        .font(.system(size: 20, weight: .medium))
-                        .foregroundStyle(.blue)
-                        .frame(width: 30)
-
-                    VStack(alignment: .leading, spacing: 3) {
-
-                        Text(item.title)
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundStyle(.primary)
-
-                        Text(item.subtitle)
-                            .font(.system(size: 13))
-                            .foregroundStyle(.secondary)
-                    }
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 12, weight: .semibold))
-                        .foregroundStyle(.gray)
-                }
-                .padding(.vertical, 14)
-                .padding(.horizontal, 16)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.gray.opacity(0.08), lineWidth: 1)
-                )
-                .shadow(color: .black.opacity(0.04), radius: 5, y: 2)
-                .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-
-                
-            }
-        }
-        
-    }
 }
 
 #Preview {

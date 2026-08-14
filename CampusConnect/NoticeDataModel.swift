@@ -31,10 +31,18 @@ struct Notice: Identifiable, Hashable {
     let img: String
     let title: String
     let message: String
-    let date: String
+    let date : Date
     let category: NoticeCategory
     let details: String
    
+}
+
+enum NoticeSortOption: CaseIterable, Hashable {
+    case az
+    case za
+    case latest
+    case oldest
+
 }
 
 
@@ -43,7 +51,7 @@ let notices: [Notice] = [
         img: "calendar.badge",
         title: "Semester Registration Open",
         message: "Registration for the odd semester has started.",
-        date: "24 July 2026",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 7,day: 28))!,
         category: .academics,
         details: "Students must complete their semester registration before 31 July 2026 through the college portal. Late registrations may incur additional charges."
     ),
@@ -52,7 +60,7 @@ let notices: [Notice] = [
         img: "note.text",
         title: "Mid Semester Exams",
         message: "Exam timetable has been published.",
-        date: "25 July 2026",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 8,day: 20))!,
         category: .exams,
         details: "Mid-semester examinations will begin on 10 August 2026. Students should download the timetable from the examination portal."
     ),
@@ -61,7 +69,7 @@ let notices: [Notice] = [
         img: "wallet.bifold",
         title: "Water Supply Maintenance",
         message: "Temporary water shutdown.",
-        date: "26 July 2026",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 7,day: 12))!,
         category: .hostel,
         details: "Water supply in all hostels will remain unavailable from 9:00 AM to 1:00 PM due to maintenance work."
     ),
@@ -70,7 +78,7 @@ let notices: [Notice] = [
         img: "personalhotspot",
         title: "Fee Payment Reminder",
         message: "Last date for fee payment announced.",
-        date: "27 July 2026",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 8,day: 10))!,
         category: .admin,
         details: "Students are requested to pay their semester fees before 5 August 2026 to avoid a late fee."
     ),
@@ -79,7 +87,7 @@ let notices: [Notice] = [
         img: "calendar.badge",
         title: "Library Orientation",
         message: "Orientation for first-year students.",
-        date: "28 July 2026",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 7,day: 1))!,
         category: .academics,
         details: "The orientation session will be held in the Central Library at 11:00 AM. Attendance is recommended for all first-year students."
     ),
@@ -88,7 +96,7 @@ let notices: [Notice] = [
         img: "note.text",
         title: "Admit Cards Available",
         message: "Download your admit card.",
-        date: "29 July 2026",
+        date: Calendar.current.date(from: DateComponents(year: 2026,month: 8,day: 2))!,
         category: .exams,
         details: "Students can download their admit cards from the student portal. Carry a printed copy to every examination."
     )

@@ -1,120 +1,137 @@
-//
-//  ContentView.swift
-//  CampusConnect
-//
-//  Created by PIET 11 on 23/07/26.
-//
-
 import SwiftUI
 
 struct RolePage: View {
+    
     var body: some View {
-        NavigationStack{
-            VStack(alignment: .center, spacing: 0){
+        
+            ZStack {
                 
-                Text("Welcome to Campus Connect 👋")
-                    .font(.system(size: 23, weight: .heavy ))
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth : 300)
-                    .padding(.bottom, 12)
+                LinearGradient(
+                    colors: [
+                        Color.blue.opacity(0.2),
+                        Color.blue.opacity(0.08),
+                        Color.blue.opacity(0.14)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
                 
-                Text("How would you like to continue?")
-                    .font(.system(size: 17, weight: .regular ))
-                    .foregroundStyle(.secondary)
-                    .padding(.bottom, 20)
-                
-                
-                //student login
-                ZStack(alignment : .bottomTrailing){
-                    VStack(spacing : 5){
-                        Image(systemName: "graduationcap.fill")
-                            .resizable()
-                            .frame(width: 60,height: 60)
-                            .foregroundStyle(Color(red: 21/255, green: 101/255, blue: 245/255))
-                        Text("Student")
-                            .font(.system(size: 23, weight: .heavy))
-                        
-                        Text("Access campus events, notices, transport, and community. ")
-                            .font(.system(size: 15, weight: .regular))
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth : 300)
-                    }.padding(.horizontal, 22)
-
+                VStack(spacing: 0) {
                     
-                    NavigationLink {
-                        StudentLoginView()
-                    }label: {
-                        Image(systemName: "arrowshape.right.fill")
-                            .resizable()
-                            .frame(width: 12,height: 12)
-                            .foregroundStyle(.white)
-                            .padding(8)
-                            .background(
-                                Circle()
-                                    .fill(Color(red: 21/255, green: 101/255, blue: 245/255)))
-                    }
-                }.padding(.horizontal, 20)
-                    .padding(.vertical,16)
-                .overlay{
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.gray.opacity(0.5), lineWidth: 4)
-                            .blur(radius: 9)
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.secondary.opacity(0.5), lineWidth: 2)
-                            
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.bottom, 15)
-                
-                //admin login
-                ZStack(alignment : .bottomTrailing){
-                    VStack(spacing : 5){
-                        Image(systemName: "lock.badge.clock.fill")
-                            .resizable()
-                            .frame(width: 60,height: 60)
-                            .foregroundStyle(Color(red: 21/255, green: 101/255, blue: 245/255))
-                        Text("Admin")
-                            .font(.system(size: 23, weight: .heavy))
-                        
-                        Text("Manage events, notices, transport, and campus content. ")
-                            .font(.system(size: 15, weight: .regular))
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth : 300)
-                    }.padding(.horizontal, 22)
+                    Text("Welcome to Campus Connect 👋")
+                        .font(.system(size: 25, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 30)
                     
-                    NavigationLink {
-                        AdminLoginView()
-                    }label: {
-                        Image(systemName: "arrowshape.right.fill")
-                            .resizable()
-                            .frame(width: 12,height: 12)
-                            .foregroundStyle(.white)
-                            .padding(8)
-                            .background(
-                                Circle()
-                                    .fill(Color(red: 21/255, green: 101/255, blue: 245/255)))
-                    }
-                }.padding(.horizontal, 20)
-                    .padding(.vertical,16)
-                .overlay{
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.gray.opacity(0.5), lineWidth: 4)
-                            .blur(radius: 9)
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.secondary.opacity(0.5), lineWidth: 2)
+                    Text("How would you like to continue?")
+                        .font(.system(size: 15))
+                        .foregroundStyle(.secondary)
+                        .padding(.top, 8)
+                        .padding(.bottom, 35)
+                    
+                    
+                    // Student Card
+                    ZStack(alignment: .bottomTrailing) {
+                        
+                        VStack(spacing: 10) {
                             
+                            Image(systemName: "graduationcap.fill")
+                                .font(.system(size: 38))
+                                .foregroundStyle(.blue)
+                                .frame(width: 75, height: 75)
+                                .background(Color.blue.opacity(0.12), in: Circle())
+                            
+                            Text("Student")
+                                .font(.system(size: 23, weight: .bold))
+                            
+                            Text("Access campus events, notices, transport, and community.")
+                                .font(.system(size: 14))
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                                .lineSpacing(3)
+                                .frame(maxWidth: 280)
+                        }
+                        .padding(.vertical, 22)
+                        .padding(.horizontal, 20)
+                        
+                        
+                        NavigationLink {
+                            StudentLoginView()
+                        } label: {
+                            Image(systemName: "arrow.right")
+                                .font(.system(size: 15, weight: .bold))
+                                .foregroundStyle(.white)
+                                .frame(width: 40, height: 40)
+                                .background(.blue, in: Circle())
+                        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: -10))
+                            
+                        
                     }
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 22))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 22)
+                            .stroke(Color.blue.opacity(0.08), lineWidth: 1)
+                    )
+                    .shadow(color: .blue.opacity(0.12), radius: 10, y: 5)
+                    .padding(.horizontal, 20)
+                    
+                    
+                    // Admin Card
+                    ZStack(alignment: .bottomTrailing) {
+                        
+                        VStack(spacing: 10) {
+                            
+                            Image(systemName: "lock.badge.clock.fill")
+                                .font(.system(size: 38))
+                                .foregroundStyle(.blue)
+                                .frame(width: 75, height: 75)
+                                .background(Color.blue.opacity(0.12), in: Circle())
+                            
+                            Text("Admin")
+                                .font(.system(size: 23, weight: .bold))
+                            
+                            Text("Manage events, notices, transport, and campus content.")
+                                .font(.system(size: 14))
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                                .lineSpacing(3)
+                                .frame(maxWidth: 280)
+                        }
+                        .padding(.vertical, 22)
+                        .padding(.horizontal, 20)
+                        
+                        
+                        NavigationLink {
+                            AdminLoginView()
+                        } label: {
+                            Image(systemName: "arrow.right")
+                                .font(.system(size: 15, weight: .bold))
+                                .foregroundStyle(.white)
+                                .frame(width: 42, height: 42)
+                                .background(.blue, in: Circle())
+                        }
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 5, trailing: -10))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 22))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 22)
+                            .stroke(Color.blue.opacity(0.08), lineWidth: 1)
+                    )
+                    .shadow(color: .blue.opacity(0.12), radius: 10, y: 5)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 18)
+                    
+                    Spacer()
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 10)
-                
-            }.padding()
-        }.navigationBarBackButtonHidden()
+                .padding(.top, 50)
+            
+        }
+        .navigationBarBackButtonHidden()
     }
 }
 

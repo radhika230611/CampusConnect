@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainPage: View {
     var body: some View {
-        NavigationStack{
+ 
             TabView {
                 HomePage()
                     .tabItem {
@@ -51,8 +51,9 @@ struct MainPage: View {
                         Text("More")
                     }
                
-            }.tint(.blue)
+        
         }.navigationBarBackButtonHidden()
+            .tint(.blue)
     }
 }
 

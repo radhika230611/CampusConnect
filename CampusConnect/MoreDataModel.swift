@@ -164,35 +164,6 @@ Until your replacement card is ready, carry any temporary identification provide
     )
 ]
 
-struct ConnectItem: Identifiable {
-    let id = UUID()
-    let icon: String
-    let title: String
-    let subtitle: String
-}
-
-let connectItems = [
-    ConnectItem(
-        icon: "person.2.fill",
-        title: "Student Community",
-        subtitle: "Discuss, share and connect"
-    ),
-    ConnectItem(
-        icon: "person.crop.circle.badge.exclamationmark",
-        title: "Lost & Found",
-        subtitle: "Lost something? We can help!"
-    ),
-    ConnectItem(
-        icon: "cart.fill",
-        title: "Buy & Sell",
-        subtitle: "Buy or sell within campus"
-    ),
-    ConnectItem(
-        icon: "building.columns.fill",
-        title: "Clubs & Societies",
-        subtitle: "Explore and join clubs"
-    )
-]
 
 
 

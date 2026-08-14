@@ -10,9 +10,34 @@ import SwiftUI
 struct NoticesPage: View {
     @State private var selectedCategory : NoticeCategory? = .all
     @State private var selectedNotice : Notice?
+    @State private var selectedSort: NoticeSortOption = .latest
+    
+    var sortedNotices: [Notice] {
+        switch selectedSort {
+        case .az:
+            return notices.sorted {
+                $0.title.localizedCaseInsensitiveCompare($1.title) == .orderedAscending
+            }
+            
+        case .za:
+            return notices.sorted {
+                $0.title.localizedCaseInsensitiveCompare($1.title) == .orderedDescending
+            }
+            
+        case .latest:
+            return notices.sorted {
+                $0.date > $1.date
+            }
+            
+        case .oldest:
+            return notices.sorted {
+                $0.date < $1.date
+            }
+        }
+    }
 
     var body: some View {
-        NavigationStack{
+        
             ZStack{
                 LinearGradient(
                     colors: [
@@ -34,9 +59,71 @@ struct NoticesPage: View {
                         Text("Notices")
                             .font(.system(size:25, weight: .bold))
                         Spacer()
-                        Image(systemName:"magnifyingglass")
-                            .resizable()
-                            .frame(width: 20,height: 20)
+                        Menu {
+                            Button {
+                                selectedSort = .az
+                            } label: {
+                                HStack{
+                                    Text("A → Z")
+                                    if selectedSort == .az{
+                                        Image(systemName: "checkmark.square.fill")
+                                            .font(.system(size: 12))
+                                            .foregroundStyle(.blue)
+                                    }
+                                }
+                                
+                                    
+                            }
+                            
+                            Button {
+                                selectedSort = .za
+                            } label: {
+                                HStack{
+                                    Text("Z → A")
+                                    if selectedSort == .za{
+                                        Image(systemName: "checkmark.square.fill")
+                                            .font(.system(size: 12))
+                                            .foregroundStyle(.blue)
+                                    }
+                                }
+                                   
+                            }
+                            
+                            Button {
+                                selectedSort = .latest
+                            } label: {
+                                HStack{
+                                    Text("Latest")
+                                    if selectedSort == .latest{
+                                        Image(systemName: "checkmark.square.fill")
+                                            .font(.system(size: 12))
+                                            .foregroundStyle(.blue)
+                                    }
+                                }
+                                   
+                            }
+                            
+                            Button {
+                                selectedSort = .oldest
+                            } label: {
+                                HStack{
+                                    Text("Oldest")
+                                    if selectedSort == .oldest{
+                                        Image(systemName: "checkmark.square.fill")
+                                            .font(.system(size: 12))
+                                            .foregroundStyle(.blue)
+                                    }
+                                }
+                                    
+                            }
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                                .font(.system(size: 18))
+                                .foregroundStyle(.blue)
+                                .frame(width: 38, height: 38)
+                                .background(Color.white)
+                                .clipShape(Circle())
+                        }
                         
                     }
                     .foregroundStyle(.primary)
@@ -135,7 +222,7 @@ struct NoticesPage: View {
                     
                     //notices
                     List{
-                        ForEach(notices) { notice in
+                        ForEach(sortedNotices) { notice in
                             if (selectedCategory == notice.category || selectedCategory == .all) {
                                 HStack{
                                     Image(systemName: notice.img)
@@ -154,7 +241,7 @@ struct NoticesPage: View {
                                                 .foregroundStyle(notice.category.color)
 
                                             Spacer()
-                                            Text(notice.date)
+                                            Text(notice.date.formatted(date: .abbreviated, time: .omitted))
                                                 .font(.system(size:11, weight:.semibold))
                                         }
                                         HStack{
@@ -195,6 +282,8 @@ struct NoticesPage: View {
                     }.navigationDestination(item: $selectedNotice){notice in
                         NoticeDetailPage(notice: notice)}
                     .listStyle(.plain)
+                    .animation(.easeInOut(duration: 0.35), value: selectedSort)
+                    .animation(.easeOut(duration: 0.35), value: selectedCategory)
                         .scrollContentBackground(.hidden)
                     Spacer()
                     
@@ -202,7 +291,7 @@ struct NoticesPage: View {
                     
                 }.padding(.horizontal, 16)
                     .padding(.top, 10)
-            }
+            
         }.navigationBarHidden(true)
     }
 }
